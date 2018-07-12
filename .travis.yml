@@ -1,0 +1,40 @@
+language: julia
+os:
+  - linux
+julia:
+  - 0.6
+notifications:
+  email: false
+git:
+  depth: 99999999
+cache:
+  timeout: 1000
+  directories:
+    - downloads
+env:
+  global:
+    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+    - BINARYBUILDER_AUTOMATIC_APPLE=false
+sudo: required
+
+# Before anything else, get the latest versions of things
+before_script:
+  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryProvider.jl")'
+  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
+
+script:
+  - julia build_tarballs.jl
+
+
+deploy:
+    provider: releases
+    api_key:
+        # Note; this api_key is only valid for SimonDanisch/LAMEBuilder; you need
+        # to make your own: https://docs.travis-ci.com/user/deployment/releases/
+        secure: Ir7bde3/ZB7baiVY7f/9XzlTDKSt/c8qnGCvuuwqlT7H9bxkOi+rGiILfcwau6hfwMHJPq7yd5Nz50FN8ctawJi8k7Yq+KvU2IErWLa8Rkohl9Ny9jS831w+K7cJIObpSG1AYchF2IQjFFY9DyXbpCAAGA8AH0DnZFHNXzhBPvmkTkMNDxvJbKiwK5rImPwa/4CXRO31WdyvVsOqLwfcRMPWZueUiOfw5eeT4AZCx+BoFG7yb7/KOKNNFbrTto0nAsJ6oMy7Ic3JsMFCyT/QL/TAd8oTCygYKCU745fpxgNEbrHbGQ23BZ6nDX76n1vfbwZB21ZPEcQ5C0gboHvmuBDu35lAT1ZIxsYOMQf1Dv7Ure98Tg9rcIadwNbZtX9OG9H5AX9Ek4zgLiTBxg4ag5TuD3ShTyWbFgS5dXCzYp5pxiT9pRRIlMV6Z3hzusH9ctpiXZKOhhravbWRrKV31nyMhuYSv+QgwGDwThLPGkCl+bZ8Pm7AfVXEzoBoy1Wv6gNOAvexFdwPcHb2sCtqbssgkdms3GgIzN+XMLfynGNvU7/Z2CCoyFSuYGLIs+DyxwrEWHdqVubT3FtYb9ytmYHUqr/MvI1eGZyJtyr4a5FSwhTvNGeqPxM6wyHkD3TYu68zBHzwLp+V0z7oS91CBDM5NXOYfsxC70bV1fi3FSc=
+    file_glob: true
+    file: products/*
+    skip_cleanup: true
+    on:
+        repo: SimonDanisch/LAMEBuilder
+        tags: true
