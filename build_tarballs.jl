@@ -16,7 +16,7 @@ sources = [
 script = raw"""
 cd $WORKSPACE/srcdir
 cd lame-3.100/
-apk install nasm
+apk add nasm
 case $(uname -m) in    i?86) sed -i -e 's/<xmmintrin.h/&.nouse/' configure ;; esac
 ./configure --prefix=$prefix --host=$target 
 make -j${ncore}
