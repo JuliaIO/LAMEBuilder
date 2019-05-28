@@ -16,6 +16,8 @@ sources = [
 script = raw"""
 cd $WORKSPACE/srcdir
 cd lame-3.100/
+sed -i '2d' include/libmp3lame.sym
+apk add nasm
 case $(uname -m) in    i?86) sed -i -e 's/<xmmintrin.h/&.nouse/' configure ;; esac
 ./configure --prefix=$prefix --host=$target 
 make -j${ncore}
@@ -27,16 +29,26 @@ exit
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
+    # Windows
+    Windows(:i686),
+    Windows(:x86_64),
+
+    # linux
     Linux(:i686, :glibc),
     Linux(:x86_64, :glibc),
     Linux(:aarch64, :glibc),
-    Linux(:armv7l, :glibc, :eabihf),
+    Linux(:armv7l, :glibc),
     Linux(:powerpc64le, :glibc),
+
+    # musl
     Linux(:i686, :musl),
     Linux(:x86_64, :musl),
     Linux(:aarch64, :musl),
-    Linux(:armv7l, :musl, :eabihf),
-    FreeBSD(:x86_64)
+    Linux(:armv7l, :musl),
+
+    # The BSD's
+    FreeBSD(:x86_64),
+    MacOS(:x86_64),
 ]
 
 # The products that we will ensure are always built
@@ -46,7 +58,7 @@ products(prefix) = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    "https://github.com/SimonDanisch/NASMBuilder/releases/download/2.13.3/build_nasm.v2.13.3.jl"
+
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
