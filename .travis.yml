@@ -32,5 +32,3 @@ deploy:
   skip_cleanup: true
   on:
     repo: JuliaIO/LAMEBuilder
-    tags: true
-
