@@ -24,14 +24,13 @@ before_script:
 script:
 - julia build_tarballs.jl
 deploy:
-    provider: releases
-    api_key:
-        # Note; this api_key is only valid for SimonDanisch/LAMEBuilder; you need
-        # to make your own: https://docs.travis-ci.com/user/deployment/releases/
-        secure: Ir7bde3/ZB7baiVY7f/9XzlTDKSt/c8qnGCvuuwqlT7H9bxkOi+rGiILfcwau6hfwMHJPq7yd5Nz50FN8ctawJi8k7Yq+KvU2IErWLa8Rkohl9Ny9jS831w+K7cJIObpSG1AYchF2IQjFFY9DyXbpCAAGA8AH0DnZFHNXzhBPvmkTkMNDxvJbKiwK5rImPwa/4CXRO31WdyvVsOqLwfcRMPWZueUiOfw5eeT4AZCx+BoFG7yb7/KOKNNFbrTto0nAsJ6oMy7Ic3JsMFCyT/QL/TAd8oTCygYKCU745fpxgNEbrHbGQ23BZ6nDX76n1vfbwZB21ZPEcQ5C0gboHvmuBDu35lAT1ZIxsYOMQf1Dv7Ure98Tg9rcIadwNbZtX9OG9H5AX9Ek4zgLiTBxg4ag5TuD3ShTyWbFgS5dXCzYp5pxiT9pRRIlMV6Z3hzusH9ctpiXZKOhhravbWRrKV31nyMhuYSv+QgwGDwThLPGkCl+bZ8Pm7AfVXEzoBoy1Wv6gNOAvexFdwPcHb2sCtqbssgkdms3GgIzN+XMLfynGNvU7/Z2CCoyFSuYGLIs+DyxwrEWHdqVubT3FtYb9ytmYHUqr/MvI1eGZyJtyr4a5FSwhTvNGeqPxM6wyHkD3TYu68zBHzwLp+V0z7oS91CBDM5NXOYfsxC70bV1fi3FSc=
-    file_glob: true
-    file: products/*
-    skip_cleanup: true
-    on:
-        repo: SimonDanisch/LAMEBuilder
-        tags: true
+  provider: releases
+  api-key:
+    secure: nG05FB2yBLYY59DPUyfPU6DSWHsnFt+nX8j7gwI1JLWLp2LgJiIQ/f4NS+OyB4J/81UKuJpKwmNV3KGb7dIXAWgzbCnuPtnshj95apvP9p3rOTBWmaYkDEJFA54sgoo4KxCgVMleL777MGpGTGvdM19kKh8Fx281yXiwy7gY3w1+i378opZxHS7snjkGfjcs/Fe7n6YprQKKQzIMq/z3ivAjNkhEWR7B7PF/x5+pizbb1Y5FlwHf2iMGQv2gIk2LPq7gExleRe1wsccLuQNYegdZ7mqcnYi/fk58ijcw44l1Hbj2tKDpRulkXpzA55Plaj2yPlKRF3llRW52MWRnlIVRnVgr+2H7RNK/UAZ6LyhgdqZJCEuQ00cqk8AuZ4HHUCyw8kgkBYSs0qqYSin3BM/HZWP+6j0NXb68m2v2ftjQRcUMPjOpiRb3yQ4H+FkXPem/mTLGVFgmbpZGMvPOVxDpw+zywq8soaRWeL6d0lZ0yRjkkFKHUAOgLRffmpIbjSWy6YjwyWEofs6HYYJk6rHHrVXf95A5S/K84Pla2CoLGqEsik/fhcSbIVbR+tRopRDs+j4cR0ULHy+lWi/vY7sObUaqZVwIstK70WTVumjAmX+4IrIn4NzxsUt7Al6rXiYQL/Jyv4ywUJHl8EYA5Ci/0REDfzrbc1ZAHu3Ftyg=
+  file_glob: true
+  file: products/*
+  skip_cleanup: true
+  on:
+    repo: JuliaIO/LAMEBuilder
+    tags: true
+
